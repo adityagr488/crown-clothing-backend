@@ -16,19 +16,19 @@ export enum PaymentType {
     UPI = "UPI",
     CREDIT_CARD = "CREDIT_CARD",
     DEBIT_CARD = "DEBIT_CARD",
-    NET_BANKING = "NET_BANKING",
     CASH = "CASH"
 }
 
 export interface OrderInterface extends mongoose.Document {
     user: UserInterface
-    date: Date
+    order_date: Date
     items: CartItemInterface[]
     totalItems: number
     totalAmount: number
     orderStatus: OrderStatus
     paymentType: PaymentType
     address: AddressInterface
+    order_delivery_date: Date
 }
 
 const OrderSchema = new mongoose.Schema<OrderInterface>({
@@ -37,7 +37,7 @@ const OrderSchema = new mongoose.Schema<OrderInterface>({
         ref: "User",
         required: true
     },
-    date: {
+    order_date: {
         type: Date,
         required: true
     },
@@ -63,7 +63,10 @@ const OrderSchema = new mongoose.Schema<OrderInterface>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Address",
         required: true
-    }
+    },
+    order_delivery_date: {
+        type: Date,
+    },
 });
 
 const Order = model("Order", OrderSchema);

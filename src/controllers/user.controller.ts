@@ -132,9 +132,7 @@ export const addUserAddress = async (req: AuthenticatedRequest, res: Response) =
         res.status(StatusCodes.CREATED).json(addresses);
         return;
     } catch (e: any) {
-        console.log(e.message);
         if (e instanceof MongooseError) {
-            console.log(e.message);
             res.status(StatusCodes.BAD_REQUEST).json({ error: "All fields are required." });
             return
         } else {
@@ -154,9 +152,7 @@ export const updateUserAddress = async (req: AuthenticatedRequest, res: Response
         const addresses = await getAddressDetails(user!);
         res.status(StatusCodes.OK).json(addresses);
     } catch (e: any) {
-        console.log(e.message);
         if (e instanceof MongooseError) {
-            console.log(e.message);
             res.status(StatusCodes.BAD_REQUEST).json({ error: "All fields are required." });
             return
         } else {
